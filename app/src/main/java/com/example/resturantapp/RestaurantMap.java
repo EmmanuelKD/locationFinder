@@ -1,19 +1,27 @@
 package com.example.resturantapp;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,10 +29,21 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
-import static android.provider.SettingsSlicesContract.KEY_LOCATION;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 
 public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallback {
@@ -38,20 +57,108 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     public static final String Coarse_Location=Manifest.permission.ACCESS_COARSE_LOCATION;
     // getting the location permissionprivate // check if the permissions are all true
     public static final int LOCATION_PERMISSION_REQUEST_CODE=1234;
-    private boolean mLocationPermissionGranted=false;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private static boolean mLocationPermissionGranted=false;
+    private  FusedLocationProviderClient mFusedLocationProviderClient;
     // even though i have written them in the AndroidManifest it needs to be checked once more if the y are present
-   private static final float DEFAULT_ZOOM=15f;
+    private static final float DEFAULT_ZOOM=15f;
+    // widgets/ buttons ,cards and all
+    private AutoCompleteTextView searchEditText;
+    private ImageView gpsLocation;
+    int AUTOCOMPLETE_REQUEST_CODE=1;
+    private LatLng mLatlong;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resturant_map);
 
-        Log.d(TAG,"MapOnCreate();££££££££££££££££££££££££££££££££££££££££££££££££££££££");
+//searchEditText=(AutoCompleteTextView) findViewById(R.id.input_search);
+        gpsLocation=(ImageView) findViewById(R.id.gpsLocation);
+
         getLocationPermission();
+
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), getString(R.string.api_key), Locale.US);
+        }
+
     }
 
+
+
+
+    // initializing
+    private void init(){
+        Log.d(TAG,"init: initializing");
+
+
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        assert autocompleteFragment != null;
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                // TODO: Get info about the selected place.
+                System.out.println("Place:***********************************************=====================* " + place.getName() + ", " + place.getId());
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                // TODO: Handle the error.
+                System.out.println( "An error occurred:**************************************************** " + status);
+            }
+        });
+
+
+//        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v , int actionId , KeyEvent event) {
+//                if(
+//                        actionId== EditorInfo.IME_ACTION_SEARCH
+//                        || actionId==EditorInfo.IME_ACTION_DONE
+//                        ||event.getAction()== KeyEvent.ACTION_DOWN
+//                        || event.getAction()== KeyEvent.KEYCODE_ENTER){// searching method Exe here
+//
+//                          geoLocate();
+//                }
+//             return false;
+//            }
+//        });
+
+        gpsLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gettingDeviceLocation();
+            }
+        });
+    }
+    private void geoLocate(){
+        Log.d(TAG,"geoLocate: geoLocateing");
+
+        String searchString=searchEditText.getText().toString();
+
+        Geocoder geocoder=new Geocoder(RestaurantMap.this);
+        List<Address> list=new ArrayList<>();
+        try{
+            list=geocoder.getFromLocationName(searchString,1);
+        }catch (IOException e){
+            Log.e(TAG,"this is the error: "+ e);
+        }
+
+        if(list.size()>0){
+            Address address=list.get(0);
+            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM,
+                    address.getAddressLine(0));
+        }
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -71,31 +178,38 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
 //        updateLocationUi(); this will likely not be implimented
         if(mLocationPermissionGranted){
             gettingDeviceLocation();
+            if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED&&ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!=
+                    PackageManager.PERMISSION_GRANTED){
+
+                return;
+            }
+
             mMap.setMyLocationEnabled((true));
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            init();
         }
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34 , 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 
-    private void getLocationPermission(){
+    public void getLocationPermission(){
         Log.d(TAG,"getLocationPermission(): getting permission");
         String [] permission={Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),Fine_Location)== PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(RestaurantMap.this.getApplicationContext(),Fine_Location)== PackageManager.PERMISSION_GRANTED){
 
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),Coarse_Location)== PackageManager.PERMISSION_GRANTED){
-             mLocationPermissionGranted=true;
-            initMap();
+            if(ContextCompat.checkSelfPermission(RestaurantMap.this.getApplicationContext(),Coarse_Location)== PackageManager.PERMISSION_GRANTED){
+                mLocationPermissionGranted=true;
+                initMap();
             }else{
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(RestaurantMap.this,
                         permission,
                         LOCATION_PERMISSION_REQUEST_CODE);}
         }else{
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(RestaurantMap.this,
                     permission,
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
+
     }
 
     @Override
@@ -114,8 +228,8 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
                     }
                 Log.d(TAG,"OnRequestPermissionResult();  Permission granted");
                 mLocationPermissionGranted=true;
-                    initMap();
-                    // initialize map
+                initMap();
+                // initialize map
             }
         }
     }
@@ -134,7 +248,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
             if(mLocationPermissionGranted){
 
                 mFusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
-                 Task location=mFusedLocationProviderClient.getLastLocation();
+                Task location=mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(this,new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
@@ -145,8 +259,8 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
                             mLastKnownLocation=(Location)task.getResult(); // there was a bug here i look change the scope of the variable
 
                             assert mLastKnownLocation != null;
-                            LatLng mLatlong=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
-                            moveCamera(mLatlong, DEFAULT_ZOOM);
+                            mLatlong=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
+                            moveCamera(mLatlong, DEFAULT_ZOOM,"my location");
                         }else{
                             Log.d(TAG,"onComplete: current location is null !");
                             Toast.makeText(RestaurantMap.this,"unable to get location", Toast.LENGTH_SHORT).show();
@@ -157,10 +271,10 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
 
             }
         }catch(SecurityException e){
-Log.d(TAG,"getDeviceLocation: SecurityException: "+ e.getMessage());
+            Log.d(TAG,"getDeviceLocation: SecurityException: "+ e.getMessage());
         }
     }
-private void updateLocationUi(){
+    private void updateLocationUi(){
 
         if (mMap == null) {
             return;
@@ -179,7 +293,7 @@ private void updateLocationUi(){
             Log.e("Exception: %s", e.getMessage());
         }
 
-}
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -192,9 +306,41 @@ private void updateLocationUi(){
     }
 
 
-    private void moveCamera(LatLng latlng,float zoom){
+    private void moveCamera(LatLng latlng,float zoom, String title){
         Log.d(TAG,"moveCamera: moving the camera to: lat"+latlng.latitude+ ",lng "+latlng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,zoom));
 
+
+        //    drop a marker
+
+        MarkerOptions options=new MarkerOptions().position(latlng).title(title);
+        mMap.addMarker(options);
     }
+
+    // Auto complete section
+
+
+    @Override
+    protected void onActivityResult(int requestCode , int resultCode , @Nullable Intent data) {
+
+        super.onActivityResult(requestCode , resultCode , data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE)
+            if (requestCode == RESULT_OK) {
+                assert data != null;
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                System.out.println(place.getName() +"  "+place.getId()+"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                assert data != null;
+                Status status = Autocomplete.getStatusFromIntent(data);
+
+            } else if (requestCode == RESULT_CANCELED) {
+
+            }
+    }
+
+
+
+
+
+
 }
