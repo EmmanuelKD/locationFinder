@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">resturantapp</string>
+    <string name="app_name">fen salone</string>
     <string name="title_activity_resturant_map">Map</string>
-    <string name="api_key">AIzaSyCAUAxit5VN5lwJkquSspkLQ3geFy5Uwyo</string>
+    <string name="api_key">AIzaSyBvzU2lRWvZNfG4fhQpwRc21yfo_Hkp2eM</string>
+    <!--    <string name="api_key">AIzaSyCAUAxit5VN5lwJkquSspkLQ3geFy5Uwyo</string>-->
 
 
     <!-- title for error alerts. -->

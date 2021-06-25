@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:layout="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/popularPlaces"
+    android:background="@android:color/transparent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout:cardCornerRadius="10dp"
+        android:backgroundTint="@color/colorPrimary">
+        <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_hotel_black_24dp"
+        android:layout_toLeftOf="@id/res"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"/>
+    <ImageView
+        android:id="@+id/res"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_restaurant_black_24dp"
+        android:layout_toLeftOf="@id/heading"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"/>
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="popular Places"
+        android:layout_centerInParent="true"/>
+    <ImageButton
+        android:backgroundTint="@android:color/transparent"
+        android:id="@+id/bottom_sheet_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/up_arrow"
+        />
+
+</RelativeLayout>
+    </androidx.cardview.widget.CardView>
+<androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+
+                    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cff">
+    <RelativeLayout
+        android:layout_below="@id/recHotels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+             <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurants Available"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
+        android:id="@+id/recHotels"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:orientation="horizontal"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hotels Available"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
+        android:id="@+id/recRestaurants"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/recHotels"
+        android:orientation="horizontal"/>
+
+</RelativeLayout>
+
+                    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
+

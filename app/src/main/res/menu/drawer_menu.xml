@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item android:title="Customization" android:id="@+id/Customization" >
+<menu>
+
+    <item android:id="@+id/plan"
+        android:title="Reload"
+        android:icon="@drawable/ic_refresh_black_24dp"/>
+    <item android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_black_24dp"/>
+    <item android:id="@+id/contact"
+        android:title="Contact_us"
+        android:icon="@drawable/ic_contact_phone_black_24dp"/>
+</menu>
+</item>
+    <item android:title="Extra" android:id="@+id/Extra">
+        <menu>
+            <group android:enabled="false">
+                <item android:id="@+id/find"
+                    android:title="Find a place in mind"
+                    android:icon="@drawable/find_place"/>
+
+            <item android:id="@+id/discover"
+                android:title="Discover Places"
+                android:icon="@drawable/ic_place_black_24dp"
+               />
+            <item android:id="@+id/sales"
+                android:title="sales supply and delivery support"
+                android:icon="@drawable/delivery"
+                />
+            <item android:id="@+id/direction"
+                android:title="Get directions"
+                android:icon="@drawable/ic_directions_black_24dp"
+                />
+            </group>
+        </menu>
+    </item>
+    <item android:title="More apps and Info" android:id="@+id/moreMain">
+        <menu>
+            <item android:id="@+id/more"
+                android:title="More"
+                android:icon="@drawable/ic_more_black_24dp"/>
+        </menu>
+    </item>
+</menu>

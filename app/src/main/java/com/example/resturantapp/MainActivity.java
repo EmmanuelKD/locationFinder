@@ -3,11 +3,10 @@ package com.example.resturantapp;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int ERROR_DIALOG_REQUEST =9001;
     private static double radius=5000;// 1 meter equiv
     public static final String THEME_RES_ID_EXTRA = "widget_theme";
+    public static int m_position;
     ListView listView;
     // Create a new Places client instance
 //    PlacesClient placesClient;
@@ -40,14 +40,29 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent , View view , int position , long id) {
-                Toast.makeText(MainActivity.this," "+ position +" id "+ id +" ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this," "+ position +" id "+ id +" ", Toast.LENGTH_SHORT).show();
+             Intent intent =new Intent(MainActivity.this,placeDetails.class);
+
+
+             ParsableDataStructure parsableDataStructure =new ParsableDataStructure();
+            parsableDataStructure.setPlaceId(my_mainActivity.restaurants.get(position).getID());
+            parsableDataStructure.setLat(my_mainActivity.restaurants.get(position).getLatitude());
+            parsableDataStructure.setLng(my_mainActivity.restaurants.get(position).getLongitude());
+            parsableDataStructure.setName(my_mainActivity.restaurants.get(position).getName());
+//            parsableDataStructure.setPlaceImage(my_mainActivity.restaurants.get(position).getPhotoMetadata()); todo pass image
+
+
+                intent.putExtra("values", (Parcelable) parsableDataStructure);
+                m_position=position;
+
+             startActivity(intent);
             }
         });
 
 
         hideKeyboard();
         if(isServicesOK()){
-            init();
+//            init();
         }
         restaurantMap=new RestaurantMap();
 //        if (!Places.isInitialized()) {
@@ -58,20 +73,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void init(){
-        Button buttonMap=(Button) findViewById(R.id.map_button);
-        buttonMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG,"intent new intent");
-                Intent intent=new Intent(MainActivity.this,RestaurantMap.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-    }
+//    private void init(){
+//        Button buttonMap=(Button) findViewById(R.id.map_button);
+//        buttonMap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG,"intent new intent");
+//                Intent intent=new Intent(MainActivity.this,RestaurantMap.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//
+//
+//    }
     public boolean isServicesOK(){
 
         int available= GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);

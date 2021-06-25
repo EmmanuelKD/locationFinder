@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_marginTop="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/res_img"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/demo" />
+
+            <TextView
+                android:id="@+id/restaurant_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/res_img"
+                android:layout_toRightOf="@+id/res_img"
+                android:text="test restaurant"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+
+                />
+
+            <ImageView
+                android:id="@+id/online_offline"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="55dp"
+                android:layout_toEndOf="@+id/res_img"
+                android:layout_toRightOf="@+id/res_img"
+                android:src="@drawable/ic_active"
+                android:textColor="#21DF21" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/online_offline"
+                android:layout_marginStart="-13dp"
+                android:layout_marginLeft="-13dp"
+                android:layout_marginBottom="-22dp"
+                android:layout_toEndOf="@+id/online_offline"
+                android:layout_toRightOf="@+id/online_offline"
+                android:text="Active mon-sat 6am-9pm" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

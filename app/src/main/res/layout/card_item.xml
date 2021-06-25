@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="200dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp">
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardMain"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/cardPlaceImage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/pizza"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/cardPlaceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cram bakery"
+        android:layout_below="@id/cardPlaceImage">
+
+    </TextView>
+    <TextView
+        android:id="@+id/cardPlacedescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="40dp"
+        android:minHeight="40dp"
+        android:text="this is the restaura beaut and lamore and splendore and tenore and
+                                     amaterdolical ninordor and sindinical deloner
+                                      and visiblical glendorand this is the restaura beaut and lamore and splendore and tenore and
+                                     amaterdolical ninordor and sindinical deloner
+                                      and visiblical glendorand "
+        android:layout_below="@id/cardPlaceName"
+        android:textSize="10sp">
+
+    </TextView>
+    <LinearLayout
+        android:id="@+id/linealRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/cardPlacedescription"
+        >
+        <ImageView
+            android:id="@+id/ratingImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_black_24dp"
+
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_black_24dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_black_24dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+</RelativeLayout>

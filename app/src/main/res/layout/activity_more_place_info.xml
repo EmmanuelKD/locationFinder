@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/placeImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/fen_salone" />
+
+    <TextView
+        android:id="@+id/resturantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="resturantName"
+        android:layout_below="@id/placeImageView"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/resturantName">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this will contain random informationa abou the place that has just been found the loaction ans more contacvt phone number and all"
+
+            />
+
+
+        <TextView
+            android:id="@+id/openingHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="opening Hours"
+            android:layout_below="@id/details"/>
+
+
+        <TextView
+            android:id="@+id/telephone_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_below="@id/openingHours"/>
+
+        <TextView
+            android:id="@+id/webUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_below="@id/telephone_num"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/CommentReviews"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@id/webUrl"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" />
+</RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

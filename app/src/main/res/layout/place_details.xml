@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/placeImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:layout_above="@id/relBtn"
+        android:src="@drawable/fen_salone"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/placeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="place name"
+        android:textColor="#000"
+        android:textSize="15sp"/>
+
+    <RelativeLayout
+android:id="@+id/relBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:padding="15dp"
+        >
+        <Button
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="MENU"
+            android:backgroundTint="#fff"
+            android:textColor="#000"
+            />
+        <Button
+            android:text="LOCATION"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+
+            android:backgroundTint="#fff"
+            android:textColor="#000"
+            android:layout_below="@id/menu"
+            />
+        <Button
+            android:text="Read More"
+            android:id="@+id/moreInfo"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:backgroundTint="#fff"
+            android:textColor="#000"
+            android:layout_below="@id/map"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

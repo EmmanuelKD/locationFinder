@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+
+        android:textSize="15dp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     android:layout_centerInParent="true"
+        android:textStyle="bold"
+        android:text="Places Around You"
+        />
+
+    <ImageButton
+        android:id="@+id/bottom_sheet_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/up_arrow"
+        android:backgroundTint="@color/colorAccent"/>
+</RelativeLayout>
+    <!--    android:background="#000"-->
+<!--    android:background="#4F0C0C0C"-->
+<androidx.core.widget.NestedScrollView
+    android:layout_marginTop="50dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_marginBottom="50dp"
+    android:id="@+id/buttom_sheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
+      >
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:rowCount="3"
+            android:columnCount="2"
+            android:columnOrderPreserved="false"
+           >
+
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/Restaurant_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+            android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+
+
+            >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@drawable/restaurant"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Restaurant"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalRestaurants"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/Hotels_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/hotels"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hotels"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalHotels"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/carWash_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                         android:layout_gravity="center"
+                        android:src="@drawable/carwash"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Car Wash"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalCarWash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/gasStations_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@drawable/gas_station"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gas Stations"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalGasStation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/Hospital_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@drawable/hospitals"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hospitals"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalHospitals"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/superMarkets_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+
+                        android:src="@drawable/supermarket"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food Stores"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalFoodStores"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/placeOfWorship_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@drawable/place_of_worship"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Place Of Worship"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalPlaceOfWorship"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/AmusementParks_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@drawable/amusement"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amusement Parks"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalAmusementPark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/bank_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@drawable/bank"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Banks"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalBank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/beaches_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+
+                        android:src="@drawable/beaches"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Beaches"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+
+                        />
+                    <TextView
+                        android:id="@+id/TotalBeaches"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ff00"
+
+                        />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/RandomPlace_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="30dp"
+                android:visibility="gone"
+            >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                >
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:src="@drawable/random"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Random Places"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+
+                    />
+                <TextView
+                    android:id="@+id/TotalRandomPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#ff00"
+
+                    />
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        </GridLayout>
+
+</androidx.core.widget.NestedScrollView>
+</RelativeLayout>
